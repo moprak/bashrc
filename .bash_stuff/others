@@ -1,0 +1,64 @@
+################################ ALL ARE POSSIBLY BASH SPECIFIC###############################
+
+# Bash history
+HISTSIZE=2500
+HISTFILESIZE=2500
+shopt -s histappend
+
+## some shopt options ##
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+# correct minor spelling errors in cd
+shopt -s cdspell
+#include dotfiles in wildcard expansion 
+shopt -s dotglob
+# while expanding dirs match case-insensitively
+#shopt -s nocaseglob
+
+# Set readline to follow vim bindings
+set -o vi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+
+###################################### XTERM TITLE ######################################
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+    ;;
+screen*)
+#        PROMPT_COMMAND='CURDIR=`basename ${PWD}`;echo -ne "\033]0;${USER}@${HOSTNAME}:${CURDIR}\007\033k${CURDIR}\033\\"'
+        PROMPT_COMMAND='CURDIR=`basename ${PWD}`;echo -ne "\033]0;${USER}@${HOSTNAME}:\007\033k${CURDIR}\033\\"'
+        ;;
+*)
+    ;;
+esac
+#########################################################################################
+
+force_color_prompt=yes
+
+##################### BASH PROGRAMMABLE COMPLETION ######################
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+#########################################################################
+
+
+#########################SUDO TAB COMPLETION###########################
+complete -cf sudo
+
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b ~/.dircolorsrc`"
+fi
+
