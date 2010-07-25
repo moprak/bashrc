@@ -71,11 +71,6 @@ alias music='cd /mnt/win/Users/prakash/Music'
 alias dow='cd /home/prak/.dc++/Downloads/'
 alias cdl='cd;clear'
 
-#SSH
-alias dcf='ssh -X ae07b014@dcf'
-alias lab='ssh -X -L 3996:proxy.iitm.ac.in:3128 prakash@lab'
-alias i='ssh -X -L 3996:proxy.iitm.ac.in:3128 ae07b014@dcf'
-alias ii='ssh -X -L 3333:proxy.iitm.ac.in:3128 ae07b014@dcf'
 
 #Make life better
 alias grep='grep -in --color'
